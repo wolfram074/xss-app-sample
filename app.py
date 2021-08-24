@@ -69,8 +69,6 @@ def login():
 @login_required
 def main(info=""):
     message_list = db.session.query(Message).filter(Message.recieved_user_id == current_user.user_id).order_by(desc(Message.send_time)).all()
-    for m in message_list:
-        print(m)
     admin_message = ""
     if current_user.user_id == "Admin":
         admin_message = "flag{tekitou}"
@@ -82,8 +80,6 @@ def main(info=""):
 def send_message():
     message = Message()
     message.recieved_user_id = request.form["userid"]
-
-    print(not message.recieved_user_id == current_user.user_id)
 
     if not message.recieved_user_id == current_user.user_id and not message.recieved_user_id == "Admin":
         info = "機能は開発中であるため、自分自身か管理者(Admin)にしか送信できません"
@@ -99,7 +95,6 @@ def send_message():
 
     message.send_time = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
 
-    print(message.message_id)
     db.session.add(message)
     db.session.commit()
 
