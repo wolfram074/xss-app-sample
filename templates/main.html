@@ -1,0 +1,47 @@
+{% autoescape false %}
+<html>
+<head>
+<link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+<div class="padding-top10 info">{{ admin_message }}</div>
+<h2>メッセージ送信</h2>
+<div class="form-wrapper">
+  <form action="/send" method="post">
+    <div class="form-item">
+      <label for="送信先ユーザID"></label>
+      <input type="userid" name="userid" required="required" placeholder="送信先ユーザID"></input>
+    </div>
+    <div class="form-item">
+      <label for="message"></label>
+      <textarea name="message" rows="4" cols="40" required="required" placeholder="メッセージ"></textarea>
+    </div>
+    <div class="button-panel">
+      <input type="submit" class="button" title="送信" value="送信"></input>
+    </div>
+  </form>
+  <div class="padding-top10 info">{{ info }}</div>
+</div>
+<div class="padding-top30"></div>
+<h2>受信したメッセージ</h2>
+<div class="form-wrapper padding-top10">
+{% for message in message_list %}
+  <form  action="/messagedetail" method="post">
+    <div id="messageid{{ message.message_id }}" class="message button-panel">
+      <input type="hidden" name="messageid" value="{{ message.message_id }}">
+      <input type="submit" class="button" value="{{ message.send_time}}"></input>
+    </div>
+  </form>
+{% endfor %}
+<div class="padding-top30"></div>
+</div>
+<div class="padding-top30"></div>
+<h2>ログアウト</h2>
+<div class="form-wrapper">
+  <div class="form-footer">
+    <p><a href="/logout">logout</a></p>
+  </div>
+</div>
+</body>
+</html>
+{% endautoescape %}

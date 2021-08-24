@@ -1,0 +1,15 @@
+{% autoescape false %}
+<html>
+<head>
+<link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+<h2>{{ message.send_user_id }} さんからのメッセージ</h2>
+<div class="form-wrapper">
+<div class="padding-top30"></div>
+<div class="info">{{ message.message }}</div>
+<div class="padding-top30"></div>
+</div>
+</body>
+</html>
+{% endautoescape %}
